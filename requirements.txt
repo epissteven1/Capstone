@@ -38,7 +38,7 @@ cffi==1.16.0
 chardet==5.2.0
 charset-normalizer==3.3.2
 click==8.1.7
-cloudpickle==2.2.1
+cloudpickle>=3.0.0
 colorama==0.4.6
 comm==0.2.2
 configparser==7.1.0
