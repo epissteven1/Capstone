@@ -44,9 +44,9 @@ def app():
             }
                  @media only screen and (max-width: 600px){
                 img {
-                    width: auto;
-                    height: auto;
-                    object-fit: cover;
+                    width:450px!important;
+                    height:700px!important;
+                    object-fit: fill;
                 }
                  }
                [data-testid="stHeader"] {
