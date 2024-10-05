@@ -64,6 +64,13 @@ st.markdown(f"""
         height: 100%;
 
         }}
+
+         @media only screen and (max-width: 600px){{
+        [data-testid="stSidebarContent"] {{
+          object-fit: fill;
+        }}
+        }}
+        
         [data-testid="stVerticalBlockBorderWrapper"] {{
          background-color: transparent;
         }}
