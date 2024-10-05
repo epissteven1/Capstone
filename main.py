@@ -157,7 +157,7 @@ def app():
         Record.app()
     if option == menu_list[2]:
         AppDescription.app()
-    if option == menu_list[2]:
+    if option == menu_list[3]:
         ContactUs.app()
     
 
