@@ -24,10 +24,10 @@ def app():
         st.write("")
         st.subheader(":mailbox: Get Connected with us")
         contact_form = f"""
-            <form action = "https://formsubmit.co/Markrjmarte9@gmail.com" method = "POST">
+            <form action = "https://formsubmit.co/stevenepis9@gmail.com" method = "POST">
                 <input type= "hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
-                <input type="text" name="name" placeholder="Your email" required>
+                <input type="text" name="name" placeholder="Your Name" required>
                 <input type = "email" name="email" placeholder="Your email" required>
                 <textarea name="message" placeholder ="Your message here"></textarea>
                 <button type = "submit">Send</button>
