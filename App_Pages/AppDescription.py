@@ -42,11 +42,10 @@ def app():
             </div>
             <div class="Paragraph">
                 <a>This innovative project aims to develop a cutting-edge voice recognition system that translates spoken Tagalog into Baybayin script.
-                 The system utilizes the ABAKAD alphabets and focuses on high accuracy and noise cancellation to deliver clear and precise transcriptions. 
-                 By leveraging advanced speech-to-text technology, the project seeks to preserve and rejuvenate the Baybayin script, ensuring its continued relevance in the modern digital age. 
-                 The use of SQLite will streamline data management, while the incorporation of noise-cancellation techniques will enhance the system's reliability and performance.</a>
+                 The system utilizes the ABAKADA alphabets and focuses on high accuracy and noise cancellation to deliver clear and precise transcriptions. 
+                 By leveraging advanced speech-to-text technology, the project seeks to preserve and rejuvenate the Baybayin script, ensuring its continued relevance in the modern digital age, 
+                 while incorporating noise-cancellation techniques will enhance the system's reliability and performance.</a>
             </div>
-           
                 
         </body>
         """, unsafe_allow_html=True)
@@ -92,11 +91,10 @@ def app():
                 <a>How the App Work</a>
             </div>
             <div class="Paragraph">
-                <a><p>The Filipino-to-Baybayin Voice Recognition System is designed to seamlessly translate spoken Tagalog into the traditional Baybayin script.
+                <a><p>The Filipino-to-Baybayin Voice Recognition System is designed to translate spoken Tagalog into the traditional Baybayin script seamlessly.
                  When a user speaks a phrase in Tagalog, the app captures the audio and applies noise cancellation to ensure a clear signal. 
-                 The clean audio is then processed by a speech recognition engine trained to recognize the ABAKAD alphabets. 
+                 The clean audio is then processed by a speech recognition engine trained to recognize the ABAKADA alphabet. 
                  This engine converts the spoken words into text, which is subsequently mapped to the corresponding Baybayin characters. 
-                 The resulting Baybayin text is stored in a SQLite database, allowing for easy retrieval, saving, and sharing.
                   The app's user-friendly interface enables users to view, copy, or export their transcriptions effortlessly. 
                   Additionally, the system continuously learns and adapts to different speech patterns, enhancing its accuracy over time.</p></a>
             </div>
