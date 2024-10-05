@@ -59,7 +59,6 @@ st.markdown(f"""
         [data-testid="stSidebarContent"] {{
         background-image: url("data:image/png;base64,{img}");
         background-size:cover;
-        background-size: contain; /* Or use 'cover' depending on your needs */
         background-position: left; /* Aligns the image to the left */
         background-repeat: no-repeat;
         height: 100%;
