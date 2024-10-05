@@ -145,7 +145,7 @@ def app():
     with st.sidebar:
         option = option_menu("MENU",
                              menu_list,
-                             icons=['house', 'play', 'sliders', 'chat'],
+                             icons=['house', 'play', 'sliders', 'telephone'],
                              menu_icon="app-indicator",
                              default_index=0,
                              styles={
