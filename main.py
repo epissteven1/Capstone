@@ -20,7 +20,7 @@ def get_img_as_base64(file):
     return base64.b64encode(data).decode()
 
 
-img = get_img_as_base64("App_Images/Sidebar1.png")
+img = get_img_as_base64("App_Images/Sidebar.png")
 
 # Custom CSS for page styling
 st.markdown(f"""
