@@ -60,8 +60,6 @@ st.markdown(f"""
         background-image: url("data:image/png;base64,{img}");
         background-size:cover;
         background-position: center; /* Aligns the image to the left */
-        background-repeat: no-repeat;
-        height: 100%;
 
         }}
 
