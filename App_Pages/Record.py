@@ -144,6 +144,7 @@ def app():
         if baybayin_images:
             # Render the images into a single image
             combined_image = render_images_to_image(baybayin_images, 'output_image.png', image_dir='Image')
+            
 
             # Display the final image
             st.image(combined_image, caption='Baybayin Transcription')
