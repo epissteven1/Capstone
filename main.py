@@ -59,6 +59,7 @@ st.markdown(f"""
         [data-testid="stSidebarContent"] {{
         background-image: url("data:image/png;base64,{img}");
         background-position:center;
+        background-size:cover;
 
         }}
         [data-testid="stVerticalBlockBorderWrapper"] {{
