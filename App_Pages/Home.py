@@ -31,7 +31,7 @@ def app():
 
     st.markdown("""
             <style>
-                [data-testid="stAppViewBlockContainer"] {
+                [data-testid="stMainBlockContainer"] {
                     padding: 0;
                     margin: 0;
                     background-size:cover;
