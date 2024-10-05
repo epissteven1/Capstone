@@ -59,7 +59,7 @@ st.markdown(f"""
         [data-testid="stSidebarContent"] {{
         background-image: url("data:image/png;base64,{img}");
         background-size:cover;
-        background-position: left; /* Aligns the image to the left */
+        background-position: center; /* Aligns the image to the left */
         background-repeat: no-repeat;
         height: 100%;
 
