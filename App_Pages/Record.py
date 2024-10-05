@@ -69,7 +69,7 @@ def text_to_baybayin_images(text):
                 baybayin_images.append(image_filename)
     return baybayin_images
 
-def render_images_to_image(baybayin_images, output_file, image_dir='capstone/Capstone/Image', padding=20, max_width=800):
+def render_images_to_image(baybayin_images, output_file, image_dir='Image', padding=20, max_width=800):
     images = []
     image_dir = os.path.abspath(image_dir)
     
