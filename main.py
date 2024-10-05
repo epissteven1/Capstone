@@ -9,7 +9,7 @@ st.set_page_config(
 
 # Import statements
 import base64
-from App_Pages import Home, AppDescription, Record, Feedback
+from App_Pages import Home, AppDescription, Record
 from streamlit_option_menu import option_menu
 
 
@@ -134,11 +134,11 @@ st.markdown("""
 
 # Function to render the app
 def app():
-    menu_list = ["Home", "Transcribe", "Description",  "Feedback"]
+    menu_list = ["Home", "Transcribe", "Description"]
     with st.sidebar:
         option = option_menu("MENU",
                              menu_list,
-                             icons=['house', 'play', 'sliders',  'chat'],
+                             icons=['house', 'play', 'sliders'],
                              menu_icon="app-indicator",
                              default_index=0,
                              styles={
@@ -157,8 +157,7 @@ def app():
         Record.app()
     if option == menu_list[2]:
         AppDescription.app()
-    if option == menu_list[3]:
-        Feedback.app()
+    
 
 
 if __name__ == '__main__':
