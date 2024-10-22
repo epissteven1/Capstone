@@ -73,7 +73,7 @@ st.markdown(f"""
          background-color: transparent;
         }}
 
-        [data-testid="stAppViewContainer"] {{
+        [data-testid="stVerticalBlock"] {{
         background-color: #333333;
         }}
         [data-testid="stAppViewContainer"] {{
