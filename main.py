@@ -76,7 +76,7 @@ st.markdown(f"""
         [data-testid="stAppViewContainer"] {{
         background-color: #333333!important;
         }}
-        [data-testid="stVerticalBlock"] {{
+        [data-testid="stAppViewContainer"] {{
         background-color: white;
         }}
         [data-testid="stHeader"] {{
