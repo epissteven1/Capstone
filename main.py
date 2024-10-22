@@ -74,7 +74,7 @@ st.markdown(f"""
         }}
 
         [data-testid="stAppViewContainer"] {{
-        background-color: #333333;
+        background-color: #333333!important;
         }}
         [data-testid="stAppViewContainer"] {{
         background-color: white;
