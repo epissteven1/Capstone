@@ -49,7 +49,7 @@ st.markdown(f"""
             visibility: visible;
         }}
         footer:before {{
-            content: 'Capstone1 @ 2023-2024: FBVRS';
+            content: 'Capstone2 @ 2024-2025: FBVRS';
             color: #FF4B4B;
             display: block;
             position: relative;
