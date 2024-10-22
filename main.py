@@ -86,57 +86,7 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# JavaScript for toggling the sidebar collapse/expand
-st.markdown("""
-    <style>
-        /* Button styling for collapsing/expanding the sidebar */
-        .toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 15px;
-            z-index: 1000;
-            cursor: pointer;
-            background-color: #333;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
 
-        .toggle-btn:hover {
-            background-color: #555;
-        }
-
-        /* Adjusting sidebar visibility */
-        .collapsed .sidebar .css-fg4pbf {
-            width: 80px;
-        }
-
-        .expanded .sidebar .css-fg4pbf {
-            width: 300px;
-        }
-    </style>
-
-    <script>
-        function toggleSidebar() {
-            var sidebar = document.querySelector("section[data-testid='stSidebar']");
-            var mainblock = document.querySelector("section[data-testid='stAppViewContainer']");
-            if (sidebar.style.display === "none") {
-                sidebar.style.display = "block";
-                mainblock.style.marginLeft = "300px";
-                document.getElementById("toggle-btn").innerHTML = "&#9776;";  // Set to burger menu icon
-            } else {
-                sidebar.style.display = "none";
-                mainblock.style.marginLeft = "0px";
-                document.getElementById("toggle-btn").innerHTML = "&#x2715;";  // Set to cross icon
-            }
-        }
-    </script>
-""", unsafe_allow_html=True)
-
-# Add the toggle button for collapsing/expanding sidebar
-st.markdown("""
-    <button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()">&#9776;</button>
-""", unsafe_allow_html=True)
 
 
 # Function to render the app
