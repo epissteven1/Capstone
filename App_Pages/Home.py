@@ -22,9 +22,6 @@ def app():
                 padding: 14px 16px;
                 font-size: 22px;
             }
-            body {
-                margin: 0;
-            }
         </style>
         <div class="topnav"></div>
     """, unsafe_allow_html=True)
@@ -38,48 +35,16 @@ def app():
             [data-testid="stAppViewContainer"] {{
                 background-image: url("data:image/png;base64,{img_base64}");
                 background-size: cover;
-                background-position: 20% center; /* Shift image 20% to the right */
+                background-position: center;
                 background-repeat: no-repeat;
-                width: 100vw;
-                height: 95vh;
             }}
             [data-testid="stHeader"] {{
                 background-color: #333333;
-                padding: 0;
-                margin: 0;
             }}
-            .sidebar {{
-                float: right;
-                width: 50%;
-                padding: 0 20px 20px 15px;
-            }}
-            .sidebar p {{
-                display: block;
-                color: black;
-                text-align: left;
-                padding: 5px 16px;
-                font-size: 17px;
-            }}
-            #content {{
-                text-align: left;
-                width: 100%;
-                padding: 5px 16px;
-            }}
-            .Paragraph {{
-                overflow: hidden;
-            }}
-            .Paragraph a {{
-                display: block;
-                color: black;
-                text-align: left;
-                padding: 5px 40px;
-                font-size: 17px;
-            }}
-            /* Mobile screen adjustments */
+            /* Adjust for mobile screens */
             @media only screen and (max-width: 600px) {{
                 [data-testid="stAppViewContainer"] {{
                     background-size: auto 100%;
-                    background-repeat: no-repeat;
                     background-position: center;
                 }}
             }}
