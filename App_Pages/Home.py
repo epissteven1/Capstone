@@ -39,10 +39,11 @@ def app():
                 background-image: url("data:image/png;base64,{img_base64}");
                 background-size: cover;
                 background-position: center;
-                padding-left:10%;
-                margin: 0;
-                height: 100vh;
+                width: auto;
+                    height: auto;   
+                    object-fit: cover;
             }}
+            .img_base64 =
             [data-testid="stHeader"] {{
                 background-color: #333333;
                 padding: 0;
