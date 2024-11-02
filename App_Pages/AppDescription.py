@@ -127,10 +127,4 @@ def app():
                 font-size: 17px;
             }
         </style>
-        <body>
-            <div class="topnav">
-                <a>Relevance of Technology</a>
-            </div>
-            
-        </body>
         """, unsafe_allow_html=True)
