@@ -38,8 +38,8 @@ def app():
                 }
                  img {
                     width: 800px!important;
-                    height: 700px!important;   
-                    object-fit: cover;
+                    height: 900px!important;   
+                    object-fit: fill;
             }
                  @media only screen and (max-width: 600px){
                 img {
