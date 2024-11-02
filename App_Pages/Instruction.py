@@ -56,7 +56,7 @@ def app():
         </style>
         <body>
             <div class="Paragraph">
-                <a>2.Open the App folder or Any folder where you've saved the File “Baybayin_App.py” or the Main app(.py).</a>
+                <a>2.Open the App folder or Any folder where you've saved the File “main.py” or the Main app(.py).</a>
             </div>
         </body>
         """,unsafe_allow_html=True)
@@ -98,7 +98,7 @@ def app():
         </style>
         <body>
             <div class="Paragraph">
-                <a>4.In CMD, encode “streamlit run Baybayin_App.py” or streamlit run (then the Main App (.py)) then Enter.</a>
+                <a>4.In CMD, encode “streamlit run main.py” or streamlit run (then the Main App (.py)) then Enter.</a>
             </div>
         </body>
         """,unsafe_allow_html=True)
