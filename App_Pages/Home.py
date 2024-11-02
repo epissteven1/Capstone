@@ -1,12 +1,13 @@
 import streamlit as st
 import base64
-
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+from PIL import Image
 
 def app():
-    st.empty()
+    # Load and display the background image as a full-screen image
+    img = Image.open("App_Images/dashboard.png")
+
+    # Display the image at the top of the app
+    st.image(img, use_column_width=True)
 
     # Custom header bar
     st.markdown("""
@@ -26,33 +27,5 @@ def app():
         <div class="topnav"></div>
     """, unsafe_allow_html=True)
 
-    # Encode the image to base64
-    img_base64 = get_base64_image("App_Images/dashboard.png")
-
-    # Set background image with encoded base64 string and dynamic sizing
-    st.markdown(f"""
-        <style>
-            [data-testid="stAppViewContainer"] {{
-                background-image: url("data:image/png;base64,{img_base64}");
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                width: 100%;
-                height: 100%;
-            }}
-            [data-testid="stHeader"] {{
-                background-color: #333333;
-            }}
-            /* Mobile screen adjustments */
-            @media only screen and (max-width: 600px) {{
-                [data-testid="stAppViewContainer"] {{
-                    background-size: auto 100%;
-                    background-position: center;
-                }}
-            }}
-        </style>
-    """, unsafe_allow_html=True)
-
 if __name__ == '__main__':
     app()
-
