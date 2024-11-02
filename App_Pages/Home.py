@@ -37,8 +37,8 @@ def app():
                     
                 }
                  img {
-                    width: auto;
-                    height: auto;   
+                    width: 800px!important;
+                    height: 700px!important;   
                     object-fit: cover;
             }
                  @media only screen and (max-width: 600px){
