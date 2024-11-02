@@ -79,9 +79,7 @@ st.markdown(f"""
         [data-testid="stAppViewContainer"] {{
         background-color: white;
         }}
-        [data-testid="stHeader"] {{
         
-        }}
 
     </style>
 """, unsafe_allow_html=True)
