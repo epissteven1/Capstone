@@ -10,6 +10,7 @@ import librosa
 import noisereduce as nr
 from tensorflow.keras.models import load_model
 from io import BytesIO
+from pydub import AudioSegment
 
 # Load the Keras model
 model = load_model('model/best_model.keras')
@@ -35,11 +36,16 @@ baybayin_image_mapping = {
 }
 
 
+def convert_amr_to_wav(amr_file_path):
+    audio = AudioSegment.from_file(amr_file_path, format="amr")
+    wav_file_path = amr_file_path.replace(".amr", ".wav")
+    audio.export(wav_file_path, format="wav")
+    return wav_file_path
+
 def reduce_noise(audio_data):
     audio_np = np.frombuffer(audio_data.get_raw_data(), dtype=np.int16)
     reduced_noise = nr.reduce_noise(y=audio_np, sr=audio_data.sample_rate)
     return sr.AudioData(reduced_noise.tobytes(), audio_data.sample_rate, audio_data.sample_width)
-
 
 def extract_voiced_audio(audio_file, target_length=8000):
     y, sr = librosa.load(audio_file, sr=8000)
@@ -103,21 +109,25 @@ def text_to_baybayin_images(predicted_syllable, target_size=(250, 250)):
             st.error(f"Image file '{image_filename}' not found.")
     return None
 
+
 def image_to_base64(image):
     buffered = BytesIO()
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
+
 def app():
     st.title("Baybayin Translator")
     st.write("Upload an audio file for transcription and translation:")
-
-    uploaded_file = st.file_uploader("Choose an audio file", type=["wav", "mp3"])
+    uploaded_file = st.file_uploader("Choose an audio file", type=["wav", "mp3", "amr"])
 
     if uploaded_file is not None:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as f:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".amr" if uploaded_file.name.endswith(".amr") else ".wav") as f:
             f.write(uploaded_file.read())
             temp_audio_file = f.name
+
+        if uploaded_file.name.endswith(".amr"):
+            temp_audio_file = convert_amr_to_wav(temp_audio_file)
 
         features = extract_voiced_audio(temp_audio_file)
         predicted_syllable, confidence_score = predict_syllables(features)
@@ -137,6 +147,7 @@ def app():
             )
         else:
             st.write("Could not find an image for the predicted syllable.")
+
 
 if __name__ == "__main__":
     app()
