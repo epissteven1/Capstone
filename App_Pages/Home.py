@@ -41,7 +41,7 @@ def app():
                 background-position: 20% center; /* Shift image 20% to the right */
                 background-repeat: no-repeat;
                 width: 100vw;
-                height: 100vh;
+                height: 95vh;
             }}
             [data-testid="stHeader"] {{
                 background-color: #333333;
