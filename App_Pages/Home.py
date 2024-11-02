@@ -38,10 +38,11 @@ def app():
             [data-testid="stAppViewContainer"] {{
                 background-image: url("data:image/png;base64,{img_base64}");
                 background-size: cover;
-                background-position: 20% center;
+                background-position-x: 20%;
+                background-position-y: center;
+                background-repeat: no-repeat;
                 width: auto;
                 height: auto;
-                object-fit: cover;
             }}
             [data-testid="stHeader"] {{
                 background-color: #333333;
@@ -80,6 +81,7 @@ def app():
                 [data-testid="stAppViewContainer"] {{
                     background-size: auto 100%;
                     background-repeat: no-repeat;
+                    background-position: 0% center;
                 }}
             }}
         </style>
