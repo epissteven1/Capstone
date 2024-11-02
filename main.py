@@ -18,37 +18,20 @@ def get_img_as_base64(file):
 
 img = get_img_as_base64("App_Images/irlak.jpg")
 
-# Custom CSS for page styling
+# Sidebar styling with custom color
 st.markdown(f"""
     <style>
-        body {{
-            text-align: center;
-            background-color: white;
-        }}
-
         .sidebar-content {{
             background-color: #242525;
             color: white;
         }}
 
-        footer {{
-            visibility: visible;
-        }}
-        footer:before {{
-            content: 'Capstone2 @ 2024-2025: FBVRS';
-            color: #FF4B4B;
-            display: block;
-            position: relative;
-            padding: 2px;
-            top: 3px;
-        }}
-
         [data-testid="stSidebarContent"] {{
+            background-color: #242525;
+            color: white;
             background-image: url("data:image/png;base64,{img}");
             background-size: cover;
             background-position: left;
-            background-color: #242525;
-            color: white;
         }}
 
         /* Mobile adjustments */
