@@ -39,7 +39,7 @@ def app():
                 background-image: url("data:image/png;base64,{img_base64}");
                 background-size: cover;
                 background-position: center;
-                padding: 0;
+                padding-left:10%;
                 margin: 0;
                 height: 100vh;
             }}
