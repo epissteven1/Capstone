@@ -146,7 +146,7 @@ def app():
             st.markdown(
                 f"""
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <img src="data:image/png;base64,{image_base64}" alt="Baybayin Transcription" width="150" />
+                    <img src="data:image/png;base64,{image_base64}" alt="Baybayin Transcription" width="250" />
                 </div>
                 """,
                 unsafe_allow_html=True
