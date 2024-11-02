@@ -1,95 +1,89 @@
 import streamlit as st
-import base64
 
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
 
 def app():
+    # Clear any initial elements
     st.empty()
-
-    # Custom header bar
+    
+    # Apply CSS styling to the page
+    with st.container():
+        st.markdown("""
+            <style>
+                .topnav {
+                    background-color: #0ed145;
+                    overflow: hidden;
+                    color: white;
+                }
+                .topnav a {
+                    display: block;
+                    color: white;
+                    text-align: center;
+                    padding: 14px 16px;
+                    font-size: 22px;
+                }
+                body {
+                    margin: 0;
+                }
+            </style>
+            <body>
+                <div class="topnav"></div>
+            </body>
+        """, unsafe_allow_html=True)
+    
+    # Display the image with specific styling adjustments
+    st.image("App_Images/dashboard.png", use_column_width=True)
+    
+    # Apply additional CSS to handle sidebar and image scaling
     st.markdown("""
-        <style>
-            .topnav {
-                background-color: #0ed145;
-                overflow: hidden;
-            }
-            .topnav a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                font-size: 22px;
-            }
-            body {
-                margin: 0;
-            }
-        </style>
-        <div class="topnav"></div>
+            <style>
+                [data-testid="stAppViewBlockContainer"] {
+                    padding: 0;
+                    margin: 0;
+                }
+                
+                .sidebar {
+                    width: 250px; /* Adjust width of sidebar */
+                    padding: 0;
+                }
+                
+                .sidebar .css-1v0mbdj {
+                    padding: 20px;
+                }
+
+                /* Image adjustments */
+                img {
+                    width: 100%;
+                    height: auto;   
+                    object-fit: cover;
+                    transition: width 0.5s ease-in-out;
+                }
+
+                /* Adjust image width based on sidebar state */
+                @media (min-width: 768px) {
+                    [data-testid="stSidebar"] + div {
+                        max-width: calc(100% - 250px); /* Adjust main area width */
+                    }
+                }
+                
+                /* Sidebar appearance */
+                [data-testid="stSidebar"] {
+                    background-color: #333333;
+                    color: white;
+                    width: 250px; /* Sidebar width */
+                    position: fixed;
+                }
+                
+                /* Adjustments for small screens */
+                @media only screen and (max-width: 600px){
+                    img {
+                        width: 100%!important;
+                        height: auto!important;
+                        object-fit: fill;
+                    }
+                }
+            </style>
     """, unsafe_allow_html=True)
 
-    # Encode the image to base64
-    img_base64 = get_base64_image("App_Images/dashboard.png")
-
-    # Set background image only for the main content area
-    st.markdown(f"""
-        <style>
-            /* Apply background image to main content area */
-            [data-testid="stAppViewContainer"] > .main {{
-                background-image: url("data:image/png;base64,{img_base64}");
-                background-size: cover;
-                background-position: center;
-                height: 100vh;
-                margin-left: 300px; /* Adjust margin for sidebar width */
-            }}
-            /* Style the sidebar */
-            [data-testid="stSidebar"] {{
-                background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent sidebar */
-                color: white;
-                padding: 20px;
-            }}
-            [data-testid="stHeader"] {{
-                background-color: #333333;
-                padding: 0;
-                margin: 0;
-            }}
-            .sidebar {{
-                float: right;
-                width: 50%;
-                padding: 0 20px 20px 15px;
-            }}
-            .sidebar p {{
-                display: block;
-                color: black;
-                text-align: left;
-                padding: 5px 16px;
-                font-size: 17px;
-            }}
-            #content {{
-                text-align: left;
-                width: 100%;
-                padding: 5px 16px;
-            }}
-            .Paragraph {{
-                overflow: hidden;
-            }}
-            .Paragraph a {{
-                display: block;
-                color: black;
-                text-align: left;
-                padding: 5px 40px;
-                font-size: 17px;
-            }}
-            /* Mobile screen adjustments */
-            @media only screen and (max-width: 600px) {{
-                [data-testid="stAppViewContainer"] > .main {{
-                    background-size: auto 100%;
-                    background-repeat: no-repeat;
-                }}
-            }}
-        </style>
-    """, unsafe_allow_html=True)
 
 if __name__ == '__main__':
     app()
