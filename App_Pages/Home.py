@@ -32,17 +32,16 @@ def app():
     # Encode the image to base64
     img_base64 = get_base64_image("App_Images/dashboard.png")
 
-    # Set background image with encoded base64 string and adjust position
+    # Set background image with encoded base64 string and adjusted position
     st.markdown(f"""
         <style>
             [data-testid="stAppViewContainer"] {{
                 background-image: url("data:image/png;base64,{img_base64}");
                 background-size: cover;
-                background-position-x: 20%;
-                background-position-y: center;
+                background-position: 20% center; /* Shift image 20% to the right */
                 background-repeat: no-repeat;
-                width: auto;
-                height: auto;
+                width: 100vw;
+                height: 100vh;
             }}
             [data-testid="stHeader"] {{
                 background-color: #333333;
@@ -81,7 +80,7 @@ def app():
                 [data-testid="stAppViewContainer"] {{
                     background-size: auto 100%;
                     background-repeat: no-repeat;
-                    background-position: 0% center;
+                    background-position: center;
                 }}
             }}
         </style>
