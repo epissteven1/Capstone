@@ -1,15 +1,19 @@
 import streamlit as st
+import base64
 
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
 
 def app():
     st.empty()
-    # Add the top navigation bar
+
+    # Custom header bar
     st.markdown("""
         <style>
             .topnav {
                 background-color: #0ed145;
                 overflow: hidden;
-                color: white;
             }
             .topnav a {
                 display: block;
@@ -20,54 +24,66 @@ def app():
             }
             body {
                 margin: 0;
-                overflow: hidden; /* Prevent scrolling */
             }
         </style>
         <div class="topnav"></div>
     """, unsafe_allow_html=True)
 
-    # Display the image with automatic scaling
-    st.image(image="App_Images/dashboard.png", use_column_width=True)
+    # Encode the image to base64
+    img_base64 = get_base64_image("App_Images/dashboard.png")
 
-    # CSS to control layout and prevent scrolling
-    st.markdown("""
+    # Set background image with encoded base64 string
+    st.markdown(f"""
         <style>
-            [data-testid="stAppViewBlockContainer"] {
+            [data-testid="stAppViewContainer"] {{
+                background-image: url("data:image/png;base64,{img_base64}");
+                background-size: cover;
+                background-position: center;
                 padding: 0;
                 margin: 0;
-                overflow: hidden; /* Prevent scrolling */
-            }
-            img {
-                width: 100%;
-                height: auto;
-                object-fit: fill;
-            }
-            @media only screen and (max-width: 600px) {
-                img {
-                    width: 100%!important;
-                    height: auto!important;
-                    object-fit: contain;
-                }
-            }
-            [data-testid="stHeader"] {
+                height: 100vh;
+            }}
+            [data-testid="stHeader"] {{
                 background-color: #333333;
                 padding: 0;
                 margin: 0;
-            }
-            .sidebar {
+            }}
+            .sidebar {{
                 float: right;
                 width: 50%;
                 padding: 0 20px 20px 15px;
-            }
-            .sidebar p {
+            }}
+            .sidebar p {{
+                display: block;
                 color: black;
                 text-align: left;
                 padding: 5px 16px;
                 font-size: 17px;
-            }
+            }}
+            #content {{
+                text-align: left;
+                width: 100%;
+                padding: 5px 16px;
+            }}
+            .Paragraph {{
+                overflow: hidden;
+            }}
+            .Paragraph a {{
+                display: block;
+                color: black;
+                text-align: left;
+                padding: 5px 40px;
+                font-size: 17px;
+            }}
+            /* Mobile screen adjustments */
+            @media only screen and (max-width: 600px) {{
+                [data-testid="stAppViewContainer"] {{
+                    background-size: auto 100%;
+                    background-repeat: no-repeat;
+                }}
+            }}
         </style>
     """, unsafe_allow_html=True)
-
 
 if __name__ == '__main__':
     app()
