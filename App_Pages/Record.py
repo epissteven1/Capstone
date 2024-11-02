@@ -42,31 +42,16 @@ def reduce_noise(audio_data):
 
 
 def extract_voiced_audio(audio_file, target_length=8000):
-    # Load the audio at 8 kHz
     y, sr = librosa.load(audio_file, sr=8000)
-
-    # Apply Voice Activity Detection (VAD) to isolate voiced segments
-    voiced_segments = librosa.effects.split(y, top_db=20)  # Adjust top_db as needed
-
-    # Concatenate voiced segments to get the voiced-only audio
+    voiced_segments = librosa.effects.split(y, top_db=20)
     voiced_audio = np.concatenate([y[start:end] for start, end in voiced_segments])
 
-    # Save the voiced audio to a temporary file to play back in Streamlit
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_audio_file:
-        sf.write(temp_audio_file.name, voiced_audio, sr)  # Save voiced segments as a new audio file
-        st.audio(temp_audio_file.name, format="audio/wav")
-
-    # Ensure the length matches the model input shape (8000 samples)
     if len(voiced_audio) < target_length:
-        # Pad with zeros if shorter than 8000 samples
         voiced_audio = np.pad(voiced_audio, (0, target_length - len(voiced_audio)), mode='constant')
     elif len(voiced_audio) > target_length:
-        # Truncate to exactly 8000 samples if longer
         voiced_audio = voiced_audio[:target_length]
 
-    # Reshape to (8000, 1) for compatibility with model input
     voiced_audio = voiced_audio.reshape((target_length, 1))
-    # Add a batch dimension to match model input shape (1, 8000, 1)
     features = np.expand_dims(voiced_audio, axis=0)
 
     return features
@@ -105,19 +90,18 @@ def predict_syllables(features):
     return predicted_syllable, confidence_score
 
 
-def text_to_baybayin_images(predicted_syllable, target_size=(100, 100)):
+
+def text_to_baybayin_images(predicted_syllable, target_size=(250, 250)):
     image_filename = baybayin_image_mapping.get(predicted_syllable)
     if image_filename:
         image_path = os.path.join('Image', image_filename)
         try:
             img = Image.open(image_path)
-            # Resize the image while maintaining aspect ratio
             img.thumbnail(target_size, Image.LANCZOS)
             return img
         except FileNotFoundError:
             st.error(f"Image file '{image_filename}' not found.")
     return None
-
 
 def image_to_base64(image):
     buffered = BytesIO()
@@ -135,25 +119,24 @@ def app():
             f.write(uploaded_file.read())
             temp_audio_file = f.name
 
+        features = extract_voiced_audio(temp_audio_file)
         predicted_syllable, confidence_score = predict_syllables(features)
         st.write(f"Predicted Syllable: {predicted_syllable}")
         st.write(f"Confidence Score: {confidence_score:.2%}")
 
-        # Display Baybayin image with specified size
         baybayin_image = text_to_baybayin_images(predicted_syllable, target_size=(250, 250))
         if baybayin_image:
             image_base64 = image_to_base64(baybayin_image)
             st.markdown(
                 f"""
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <img src="data:image/png;base64,{image_base64}" alt="Baybayin Transcription" width="250" />
+                    <img src="data:image/png;base64,{image_base64}" alt="Baybayin Transcription" width="150" />
                 </div>
                 """,
                 unsafe_allow_html=True
             )
         else:
             st.write("Could not find an image for the predicted syllable.")
-
 
 if __name__ == "__main__":
     app()
