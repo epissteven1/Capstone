@@ -32,16 +32,22 @@ def app():
     # Encode the image to base64
     img_base64 = get_base64_image("App_Images/dashboard.png")
 
-    # Set background image with encoded base64 string
+    # Set background image only for the main content area
     st.markdown(f"""
         <style>
-            [data-testid="stAppViewContainer"] {{
+            /* Apply background image to main content area */
+            [data-testid="stAppViewContainer"] > .main {{
                 background-image: url("data:image/png;base64,{img_base64}");
                 background-size: cover;
                 background-position: center;
-                padding: 0;
-                margin: 0;
                 height: 100vh;
+                margin-left: 300px; /* Adjust margin for sidebar width */
+            }}
+            /* Style the sidebar */
+            [data-testid="stSidebar"] {{
+                background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent sidebar */
+                color: white;
+                padding: 20px;
             }}
             [data-testid="stHeader"] {{
                 background-color: #333333;
@@ -77,7 +83,7 @@ def app():
             }}
             /* Mobile screen adjustments */
             @media only screen and (max-width: 600px) {{
-                [data-testid="stAppViewContainer"] {{
+                [data-testid="stAppViewContainer"] > .main {{
                     background-size: auto 100%;
                     background-repeat: no-repeat;
                 }}
