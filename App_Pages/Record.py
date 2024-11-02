@@ -135,9 +135,6 @@ def app():
             f.write(uploaded_file.read())
             temp_audio_file = f.name
 
-        st.write("Processed audio")
-        features = extract_voiced_audio(temp_audio_file)
-
         predicted_syllable, confidence_score = predict_syllables(features)
         st.write(f"Predicted Syllable: {predicted_syllable}")
         st.write(f"Confidence Score: {confidence_score:.2%}")
