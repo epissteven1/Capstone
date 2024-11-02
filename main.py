@@ -47,9 +47,11 @@ st.markdown(f"""
             background-image: url("data:image/png;base64,{img}");
             background-size: cover;
             background-position: left;
+            background-color: #242525;
+            color: white;
         }}
 
-        /* Adjustments for mobile view */
+        /* Mobile adjustments */
         @media only screen and (max-width: 600px) {{
             [data-testid="stSidebarContent"] {{
                 object-fit: fill;
