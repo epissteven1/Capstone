@@ -34,7 +34,7 @@ def app():
                 [data-testid="stAppViewBlockContainer"] {
                     padding: 0;
                     margin: 0;
-                    overflow: hidden;
+                    overflow-y: hidden;
                     
                 }
                  img {
