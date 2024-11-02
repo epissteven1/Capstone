@@ -38,7 +38,7 @@ def app():
                 }
                  img {
                     width: auto;
-                    height: auto;   
+                    height: 950px!important;   
                     object-fit: cover;
                    
             }
