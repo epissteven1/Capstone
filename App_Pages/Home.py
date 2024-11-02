@@ -34,12 +34,14 @@ def app():
                 [data-testid="stAppViewBlockContainer"] {
                     padding: 0;
                     margin: 0;
+                    overflow: hidden;
                     
                 }
                  img {
                     width: auto;
                     height: 800px!important;   
                     object-fit: fill;
+                    overflow: hidden;
                    
             }
                  @media only screen and (max-width: 600px){
