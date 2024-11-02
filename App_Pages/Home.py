@@ -3,86 +3,69 @@ import streamlit as st
 
 def app():
     st.empty()
-    with st.container():
-        st.markdown("""
-            <style>
-                .topnav {
-                    background-color: #0ed145;
-                    overflow: hidden;
-                    text-color: white;
-                }
-                .topnav a {
-                    display: block;
-                    color: white;
-                    text-align: center;
-                    padding: 14px 16px;
-                    font-size: 22px;
-                }
-                body {
-                    margin: 0;
-                }
-            <body>
-                <div class="topnav"></div>
-            </body>
-        """, unsafe_allow_html=True)
+    # Add the top navigation bar
+    st.markdown("""
+        <style>
+            .topnav {
+                background-color: #0ed145;
+                overflow: hidden;
+                color: white;
+            }
+            .topnav a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                font-size: 22px;
+            }
+            body {
+                margin: 0;
+            }
+        </style>
+        <div class="topnav"></div>
+    """, unsafe_allow_html=True)
 
-    # Directly load and display the image using Streamlit's st.image
+    # Display the image with adjustments for layout
     st.image(image="App_Images/dashboard.png", use_column_width=True)
 
+    # Improved CSS to control layout and sidebar appearance
     st.markdown("""
-            <style>
-                [data-testid="stAppViewBlockContainer"] {
-                    padding: 0;
-                    margin: 0;
-                    
-                }
-                 img {
-                    width: auto;
-                    height: auto;   
-                    object-fit: cover;
+        <style>
+            [data-testid="stAppViewBlockContainer"] {
+                padding: 0;
+                margin: 0;
             }
-                 @media only screen and (max-width: 600px){
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+            @media only screen and (max-width: 600px) {
                 img {
-                    width:450px!important;
-                    height:600px!important;
-                    object-fit: fill;
+                    width: 100%!important;
+                    height: auto!important;
+                    object-fit: contain;
                 }
-                 }
-               [data-testid="stHeader"] {
-                    background-color: #333333;
-                    padding:0;
-                    margin:0;
-                }
-                .sidebar {
-                    float: right;
-                    width: 50%;
-                    padding: 0 20px 20px 15px;
-                }
-                .sidebar p {
-                    display: block;
-                    color: black;
-                    text-align: left;
-                    padding: 5px 16px;
-                    font-size: 17px;
-                }
-                #content {
-                    text-align: left;
-                    width: 100%;
-                    padding: 5px 16px;
-                }
-                .Paragraph {
-                    overflow: hidden;
-                }
-                .Paragraph a {
-                    display: block;
-                    color: black;
-                    text-align: left;
-                    padding: 5px 40px;
-                    font-size: 17px;
-                }
-            </style>
-            <body>
-            </body>
+            }
+            [data-testid="stSidebar"] {
+                background-color: #f4f4f4;
+                padding: 20px;
+            }
+            .sidebar-content {
+                text-align: left;
+                padding: 10px;
+            }
+            .sidebar-content p {
+                color: black;
+                font-size: 17px;
+            }
+            .sidebar-content a {
+                color: black;
+                text-align: left;
+                padding: 5px;
+                font-size: 17px;
+            }
+        </style>
     """, unsafe_allow_html=True)
 
 
