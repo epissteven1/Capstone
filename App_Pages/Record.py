@@ -173,7 +173,7 @@ def app():
 
     if audio_file is not None:
         # Display the uploaded audio file
-        st.audio(audio_file, format="audio/wav")
+        
 
         # Preprocess the audio file
         audio_data = preprocess_audio(audio_file)
