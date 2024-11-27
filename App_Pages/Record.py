@@ -139,21 +139,15 @@ def preprocess_audio(audio_file):
 
 
 def predict_baybayin(audio_data):
-    # Convert audio data to a TensorFlow tensor
+
     audio_data_tensor = tf.convert_to_tensor(audio_data)
-
-    # Perform prediction
     prediction = model.predict(audio_data_tensor)
+    predicted_class_index = np.argmax(prediction, axis=1)[0]
+    prediction_prob = prediction[0][predicted_class_index]  # Confidence score of the prediction
 
-    # Get the predicted class index as a whole number (integer)
-    predicted_class_index = int(np.argmax(prediction, axis=1)[0])
-
-    # Get the confidence score of the prediction and convert it to a whole number percentage
-    prediction_prob = int(prediction[0][predicted_class_index] * 100)
-
-    # Return predicted class index and confidence score as a whole number
-    return predicted_class_index, prediction_prob
-
+    # Map to Baybayin label
+    predicted_label = class_labels[predicted_class_index]
+    return predicted_label, prediction_prob  # Return label and confidence
 
 def app():
     # Streamlit App UI
