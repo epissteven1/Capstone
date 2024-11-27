@@ -181,7 +181,7 @@ def app():
         baybayin_label, prediction_prob = predict_baybayin(audio_data)
 
         # Display the result with prediction percentage as a whole number
-        st.write(f"Predicted Baybayin: **{baybayin_label}** {int(prediction_prob * 100)}%")
+        st.write(f"Predicted Baybayin: **{baybayin_label}** ({int(prediction_prob * 100)}%)")
 
 
         if baybayin_label in baybayin_images:
