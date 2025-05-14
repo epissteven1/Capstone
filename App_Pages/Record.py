@@ -6,6 +6,7 @@ import librosa
 import io
 from PIL import Image
 import requests
+import json
 
 # Load your model
 model = load_model('model/Filipino_speech_recognition.keras')
