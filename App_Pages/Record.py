@@ -18,7 +18,7 @@ class_labels = [
     'mo', 'mu', 'na', 'ne', 'nga', 'nge', 'ngi', 'ngo', 'ngu', 'ni', 'no',
     'nu', 'o', 'pa', 'pe','pi', 'po', 'pu', 'ra', 're', 'ri', 'ro', 'ru', 'sa',
     'se', 'si', 'so', 'su', 'ta', 'te', 'ti', 'to', 'tu', 'u', 'wa', 'we',
-    'wi', 'wo', 'wu', 'ya', 'ye', 'yi', 'yo', 'yu'
+    'wi', 'wo', 'wu', 'ya', 'ye', 'yi', 'yo', 'yu', 'kamusta'
 ]
 
 # Define Baybayin font image URLs for each syllable
