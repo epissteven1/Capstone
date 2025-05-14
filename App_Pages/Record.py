@@ -133,21 +133,47 @@ def extract_voiced_audio(audio_file, target_length=8000):
 
 
 def preprocess_audio(audio_file):
-    # Process audio to extract features (raw audio here)
-    audio_data = extract_voiced_audio(audio_file)
-    return audio_data
+    # Load and clean audio
+    y, sr = librosa.load(audio_file, sr=8000)
+    voiced_segments = librosa.effects.split(y, top_db=20)
+    voiced_audio = np.concatenate([y[start:end] for start, end in voiced_segments])
+
+    # Pad or trim to fixed length (8000 samples = 1 sec)
+    target_length = 8000
+    if len(voiced_audio) < target_length:
+        voiced_audio = np.pad(voiced_audio, (0, target_length - len(voiced_audio)), mode='constant')
+    else:
+        voiced_audio = voiced_audio[:target_length]
+
+    # Extract MFCC features (shape: 40 x ~time_steps)
+    mfcc = librosa.feature.mfcc(y=voiced_audio, sr=sr, n_mfcc=40)
+
+    # Normalize MFCC: zero mean, unit variance (feature-wise normalization)
+    mfcc_mean = np.mean(mfcc, axis=1, keepdims=True)
+    mfcc_std = np.std(mfcc, axis=1, keepdims=True) + 1e-10  # avoid division by zero
+    mfcc = (mfcc - mfcc_mean) / mfcc_std
+
+    # Ensure shape is (40, 100): pad or truncate time axis
+    if mfcc.shape[1] < 100:
+        mfcc = np.pad(mfcc, ((0, 0), (0, 100 - mfcc.shape[1])), mode='constant')
+    else:
+        mfcc = mfcc[:, :100]
+
+    # Reshape to (1, 40, 100, 1)
+    mfcc = np.expand_dims(mfcc, axis=-1)  # (40, 100, 1)
+    mfcc = np.expand_dims(mfcc, axis=0)   # (1, 40, 100, 1)
+
+    return mfcc
 
 
 def predict_baybayin(audio_data):
-
-    audio_data_tensor = tf.convert_to_tensor(audio_data)
+    audio_data_tensor = tf.convert_to_tensor(audio_data, dtype=tf.float32)
     prediction = model.predict(audio_data_tensor)
     predicted_class_index = np.argmax(prediction, axis=1)[0]
-    prediction_prob = prediction[0][predicted_class_index]  # Confidence score of the prediction
-
-    # Map to Baybayin label
+    prediction_prob = prediction[0][predicted_class_index]
     predicted_label = class_labels[predicted_class_index]
-    return predicted_label, prediction_prob  # Return label and confidence
+    return predicted_label, prediction_prob
+
 
 def app():
     # Streamlit App UI
