@@ -8,7 +8,7 @@ from PIL import Image
 import requests
 
 # Load your model
-model = load_model('model/best_model.keras')
+model = load_model('model/Filipino_speech_recognition.keras')
 
 # List of Baybayin class labels (syllables)
 class_labels = [
