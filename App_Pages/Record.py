@@ -103,7 +103,7 @@ baybayin_images = {
     'yo': '<a href="https://www.fontspace.com/category/baybayin"><img src="https://see.fontimg.com/api/rf5/ZV3MK/MGVjOThmZGMzMDEyNDU2OGI3NmZlMDBjOTJmZDZhMTEudHRm/eXU/bagwis-baybayin-font-regular.png?r=fs&h=91&w=1250&fg=000000&bg=FFFFFF&tb=1&s=73" alt="Baybayin fonts"></a>',
     'yu': '<a href="https://www.fontspace.com/category/baybayin"><img src="https://see.fontimg.com/api/rf5/ZV3MK/MGVjOThmZGMzMDEyNDU2OGI3NmZlMDBjOTJmZDZhMTEudHRm/eXU/bagwis-baybayin-font-regular.png?r=fs&h=91&w=1250&fg=000000&bg=FFFFFF&tb=1&s=73" alt="Baybayin fonts"></a>',
     'o': '<a href="https://www.fontspace.com/category/baybayin"><img src="https://see.fontimg.com/api/rf5/ZV3MK/MGVjOThmZGMzMDEyNDU2OGI3NmZlMDBjOTJmZDZhMTEudHRm/VQ/bagwis-baybayin-font-regular.png?r=fs&h=91&w=1250&fg=000000&bg=FFFFFF&tb=1&s=73" alt="Baybayin fonts"></a>',
-    'kamusta':<a href="https://www.fontspace.com/category/baybayin"><img src="https://see.fontimg.com/api/rf5/ZV3MK/MGVjOThmZGMzMDEyNDU2OGI3NmZlMDBjOTJmZDZhMTEudHRm/VQ/bagwis-baybayin-font-regular.png?r=fs&h=91&w=1250&fg=000000&bg=FFFFFF&tb=1&s=73" alt="Baybayin fonts"></a>',
+    'kamusta': '<a href="https://www.fontspace.com/category/baybayin"><img src="https://see.fontimg.com/api/rf5/ZV3MK/MGVjOThmZGMzMDEyNDU2OGI3NmZlMDBjOTJmZDZhMTEudHRm/VQ/bagwis-baybayin-font-regular.png?r=fs&h=91&w=1250&fg=000000&bg=FFFFFF&tb=1&s=73" alt="Baybayin fonts"></a>',
 }
 
 
