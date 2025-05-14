@@ -10,17 +10,9 @@ import requests
 # Load your model
 model = load_model('model/Filipino_speech_recognition.keras')
 
-# List of Baybayin class labels (syllables)
-class_labels = [
-    'a', 'ba', 'be', 'bi', 'bo', 'bu', 'da', 'de', 'di', 'do', 'du', 'e',
-    'ga', 'ge', 'gi', 'go', 'gu', 'ha', 'he', 'hi', 'ho', 'hu', 'i', 'ka',
-    'ke', 'ki', 'ko', 'ku', 'la', 'le', 'li', 'lo', 'lu', 'ma', 'me', 'mi',
-    'mo', 'mu', 'na', 'ne', 'nga', 'nge', 'ngi', 'ngo', 'ngu', 'ni', 'no',
-    'nu', 'o', 'pa', 'pe','pi', 'po', 'pu', 'ra', 're', 'ri', 'ro', 'ru', 'sa',
-    'se', 'si', 'so', 'su', 'ta', 'te', 'ti', 'to', 'tu', 'u', 'wa', 'we',
-    'wi', 'wo', 'wu', 'ya', 'ye', 'yi', 'yo', 'yu', 'kamusta'
-]
-
+# Load class labels from labels.json
+with open('model/labels.json', 'r', encoding='utf-8') as f:
+    class_labels = json.load(f)
 # Define Baybayin font image URLs for each syllable
 baybayin_images = {
     'a': '<a href="https://www.fontspace.com/category/baybayin"><img src="https://see.fontimg.com/api/rf5/ZV3MK/MGVjOThmZGMzMDEyNDU2OGI3NmZlMDBjOTJmZDZhMTEudHRm/YQ/bagwis-baybayin-font-regular.png?r=fs&h=91&w=1250&fg=000000&bg=FFFFFF&tb=1&s=73" alt="Baybayin fonts"></a>',
@@ -107,61 +99,30 @@ baybayin_images = {
 }
 
 
-def extract_voiced_audio(audio_file, target_length=8000):
-    # Load audio file with a fixed sample rate (8000 Hz)
-    y, sr = librosa.load(audio_file, sr=8000)
-
-    # Use librosa's split function to isolate voiced segments
-    voiced_segments = librosa.effects.split(y, top_db=20)
-
-    # Concatenate the voiced segments
-    voiced_audio = np.concatenate([y[start:end] for start, end in voiced_segments])
-
-    # Pad or truncate to the target length (8000 samples)
-    if len(voiced_audio) < target_length:
-        voiced_audio = np.pad(voiced_audio, (0, target_length - len(voiced_audio)), mode='constant')
-    elif len(voiced_audio) > target_length:
-        voiced_audio = voiced_audio[:target_length]
-
-    # Reshape to match model input shape (8000, 1)
-    voiced_audio = voiced_audio.reshape((target_length, 1))
-
-    # Expand dimensions to include batch size (1, 8000, 1)
-    features = np.expand_dims(voiced_audio, axis=0)
-
-    return features
-
 
 def preprocess_audio(audio_file):
-    # Load and clean audio
     y, sr = librosa.load(audio_file, sr=8000)
     voiced_segments = librosa.effects.split(y, top_db=20)
     voiced_audio = np.concatenate([y[start:end] for start, end in voiced_segments])
 
-    # Pad or trim to fixed length (8000 samples = 1 sec)
     target_length = 8000
     if len(voiced_audio) < target_length:
         voiced_audio = np.pad(voiced_audio, (0, target_length - len(voiced_audio)), mode='constant')
     else:
         voiced_audio = voiced_audio[:target_length]
 
-    # Extract MFCC features (shape: 40 x ~time_steps)
     mfcc = librosa.feature.mfcc(y=voiced_audio, sr=sr, n_mfcc=40)
-
-    # Normalize MFCC: zero mean, unit variance (feature-wise normalization)
     mfcc_mean = np.mean(mfcc, axis=1, keepdims=True)
-    mfcc_std = np.std(mfcc, axis=1, keepdims=True) + 1e-10  # avoid division by zero
+    mfcc_std = np.std(mfcc, axis=1, keepdims=True) + 1e-10
     mfcc = (mfcc - mfcc_mean) / mfcc_std
 
-    # Ensure shape is (40, 100): pad or truncate time axis
     if mfcc.shape[1] < 100:
         mfcc = np.pad(mfcc, ((0, 0), (0, 100 - mfcc.shape[1])), mode='constant')
     else:
         mfcc = mfcc[:, :100]
 
-    # Reshape to (1, 40, 100, 1)
-    mfcc = np.expand_dims(mfcc, axis=-1)  # (40, 100, 1)
-    mfcc = np.expand_dims(mfcc, axis=0)   # (1, 40, 100, 1)
+    mfcc = np.expand_dims(mfcc, axis=-1)
+    mfcc = np.expand_dims(mfcc, axis=0)
 
     return mfcc
 
@@ -176,47 +137,33 @@ def predict_baybayin(audio_data):
 
 
 def app():
-    # Streamlit App UI
     st.title("Speech-to-Baybayin Transcription App")
     st.write("Upload an audio file for transcription:")
 
-    # Custom CSS to resize the slider
     st.markdown("""
     <style>
         .stSlider > div > div > div {
-            width: 250px !important;  /* Set a smaller width for the slider */
-            margin: auto;  /* Center the slider */
+            width: 250px !important;
+            margin: auto;
         }
         .download-btn-container {
-            margin-top: 20px;  /* Adjust the space between image and download button */
+            margin-top: 20px;
         }
     </style>
     """, unsafe_allow_html=True)
 
-    # Upload an audio file
     audio_file = st.file_uploader("Choose an audio file", type=["wav", "mp3", "flac"])
 
     if audio_file is not None:
-        # Display the uploaded audio file
-        
-
-        # Preprocess the audio file
         audio_data = preprocess_audio(audio_file)
-
-        # Predict the corresponding Baybayin label and confidence
         baybayin_label, prediction_prob = predict_baybayin(audio_data)
 
-        # Display the result with prediction percentage as a whole number
-        st.write(f"Predicted Baybayin: **{baybayin_label}** ({int(prediction_prob * 100)}%)")
-
+        st.write(f"Predicted: **{baybayin_label}** ({int(prediction_prob * 100)}%)")
 
         if baybayin_label in baybayin_images:
             baybayin_image_html = baybayin_images[baybayin_label]
+            image_width = st.slider("Resize Image Width:", min_value=50, max_value=400, value=120, label_visibility="collapsed")
 
-            # Set a slider for resizing
-            image_width = st.slider("Resize Image Width:", min_value=50, max_value=400, value=120, label_visibility = "collapsed")
-
-            # Display the clickable Baybayin image centered with a white box background
             st.markdown(
                 f"""
                 <div style="
@@ -239,26 +186,19 @@ def app():
                 unsafe_allow_html=True
             )
 
-            # Fetch and resize the image dynamically based on the slider value
             image_url = baybayin_image_html.split('src="')[1].split('"')[0]
             image_data = requests.get(image_url).content
             image = Image.open(io.BytesIO(image_data))
-
-            # Resize the image according to the slider value
             resized_image = image.resize((image_width, int(image.height * image_width / image.width)))
 
-            # Add a white background and handle transparency
-            final_image = Image.new("RGBA", resized_image.size, (255, 255, 255, 255))  # White RGBA background
-            final_image.paste(resized_image, (0, 0),
-                              resized_image.convert("RGBA"))  # Paste the image with alpha channel
-            final_image = final_image.convert("RGB")  # Remove alpha channel for final output
+            final_image = Image.new("RGBA", resized_image.size, (255, 255, 255, 255))
+            final_image.paste(resized_image, (0, 0), resized_image.convert("RGBA"))
+            final_image = final_image.convert("RGB")
 
-            # Save the final image to a temporary buffer
             img_buffer = io.BytesIO()
             final_image.save(img_buffer, format="PNG")
             img_buffer.seek(0)
 
-            # Create a container for the download button with additional margin
             st.markdown('<div class="download-btn-container">', unsafe_allow_html=True)
             st.download_button(
                 label="Download",
@@ -267,10 +207,8 @@ def app():
                 mime="image/png"
             )
             st.markdown('</div>', unsafe_allow_html=True)
-
         else:
-            st.write("Image not available for this Baybayin syllable.")
-
+            st.write("Image not available for this label.")
 
 
 if __name__ == "__main__":
